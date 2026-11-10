@@ -24,5 +24,9 @@
   "delete": "Excluir sessão",
   "emptyTitle": "Ainda não há sessões",
   "emptySubtitle": "Adicione sua primeira sessão usando o formulário acima.",
-  "localStorageNote": "Suas sessões ficam salvas neste navegador e dispositivo. Elas não são sincronizadas online."
+  "localStorageNote": "Suas sessões ficam salvas neste navegador e dispositivo. Elas não são sincronizadas online.",
+  "editSession": "Editar sessão",
+  "updateSession": "Atualizar sessão",
+  "cancelEdit": "Cancelar",
+  "edit": "Editar sessão"
 }
