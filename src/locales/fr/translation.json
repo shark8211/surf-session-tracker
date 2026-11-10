@@ -24,5 +24,9 @@
   "delete": "Supprimer la session",
   "emptyTitle": "Aucune session pour le moment",
   "emptySubtitle": "Ajoutez votre première session avec le formulaire ci-dessus.",
-  "localStorageNote": "Vos sessions sont enregistrées dans ce navigateur sur cet appareil. Elles ne sont pas synchronisées en ligne."
+  "localStorageNote": "Vos sessions sont enregistrées dans ce navigateur sur cet appareil. Elles ne sont pas synchronisées en ligne.",
+  "editSession": "Modifier la session",
+  "updateSession": "Mettre à jour",
+  "cancelEdit": "Annuler",
+  "edit": "Modifier la session"
 }
