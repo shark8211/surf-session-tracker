@@ -24,5 +24,9 @@
   "delete": "Eliminar sesión",
   "emptyTitle": "Todavía no hay sesiones",
   "emptySubtitle": "Añade tu primera sesión con el formulario de arriba.",
-  "localStorageNote": "Tus sesiones se guardan en este navegador y dispositivo. No se sincronizan en línea."
+  "localStorageNote": "Tus sesiones se guardan en este navegador y dispositivo. No se sincronizan en línea.",
+  "editSession": "Editar sesión",
+  "updateSession": "Actualizar sesión",
+  "cancelEdit": "Cancelar",
+  "edit": "Editar sesión"
 }
