@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus } from 'lucide-react'
+import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus, Pencil, Save, X } from 'lucide-react'
 
 type Session = {
   id: string
@@ -43,6 +43,7 @@ export default function SurfSessionTracker() {
   const { t, i18n } = useTranslation()
   const [sessions, setSessions] = useState<Session[]>(readSavedSessions)
   const [formData, setFormData] = useState<SessionForm>(emptyForm)
+  const [editingId, setEditingId] = useState<string | null>(null)
   const [lang, setLang] = useState(i18n.resolvedLanguage || i18n.language || 'en')
   const totalHours = sessions.reduce((total, session) => total + (Number(session.duration) || 0), 0)
 
@@ -69,15 +70,36 @@ export default function SurfSessionTracker() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!formData.date || !formData.location.trim()) return
-    const newSession: Session = {
-      ...formData, location: formData.location.trim(),
-      id: Date.now().toString() + Math.random().toString(36).slice(2),
+    if (editingId) {
+      setSessions(previous => previous.map(session => session.id === editingId
+        ? { ...session, ...formData, location: formData.location.trim() }
+        : session))
+      setEditingId(null)
+    } else {
+      const newSession: Session = {
+        ...formData, location: formData.location.trim(),
+        id: Date.now().toString() + Math.random().toString(36).slice(2),
+      }
+      setSessions(previous => [newSession, ...previous])
     }
-    setSessions(previous => [newSession, ...previous])
     setFormData(emptyForm)
   }
 
-  const deleteSession = (id: string) => setSessions(previous => previous.filter(session => session.id !== id))
+  const startEditing = (session: Session) => {
+    setEditingId(session.id)
+    setFormData({ date: session.date, location: session.location, duration: session.duration, waveHeight: session.waveHeight, windSpeed: session.windSpeed, notes: session.notes })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const cancelEditing = () => {
+    setEditingId(null)
+    setFormData(emptyForm)
+  }
+
+  const deleteSession = (id: string) => {
+    setSessions(previous => previous.filter(session => session.id !== id))
+    if (editingId === id) cancelEditing()
+  }
 
   const exportCSV = () => {
     if (sessions.length === 0) return
@@ -131,7 +153,7 @@ export default function SurfSessionTracker() {
 
       <section className="panel form-panel">
         <div className="section-heading">
-          <div><p className="eyebrow">{t('newEntry')}</p><h2>{t('addSession')}</h2></div>
+          <div><p className="eyebrow">{t('newEntry')}</p><h2>{editingId ? t('editSession') : t('addSession')}</h2></div>
           <span className="heading-icon"><Plus size={22} /></span>
         </div>
         <form onSubmit={handleSubmit} className="session-form">
@@ -162,7 +184,8 @@ export default function SurfSessionTracker() {
             <textarea name="notes" rows={3} value={formData.notes} onChange={handleChange} placeholder={t('notesPlaceholder')} />
           </label>
           <div className="form-actions">
-            <button className="button button-primary" type="submit"><Plus size={18} /> {t('saveSession')}</button>
+            {editingId && <button className="button button-secondary" type="button" onClick={cancelEditing}><X size={18} /> {t('cancelEdit')}</button>}
+            <button className="button button-primary" type="submit">{editingId ? <Save size={18} /> : <Plus size={18} />} {editingId ? t('updateSession') : t('saveSession')}</button>
           </div>
         </form>
       </section>
@@ -192,9 +215,14 @@ export default function SurfSessionTracker() {
                   </div>
                   {session.notes && <p className="session-notes">{session.notes}</p>}
                 </div>
+                <div className="session-actions">
+                <button className="icon-button edit-button" type="button" onClick={() => startEditing(session)} aria-label={t('edit')} title={t('edit')}>
+                  <Pencil size={17} />
+                </button>
                 <button className="icon-button delete-button" type="button" onClick={() => deleteSession(session.id)} aria-label={t('delete')} title={t('delete')}>
                   <Trash2 size={17} />
                 </button>
+                </div>
               </article>
             ))}
           </div>
