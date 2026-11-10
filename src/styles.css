@@ -22,3 +22,5 @@
 .privacy-note{margin:15px 0 0;color:#829697;font-size:11px;line-height:1.5;text-align:center}
 [dir="rtl"] .hero,[dir="rtl"] .panel,[dir="rtl"] .stat-card{text-align:right}[dir="rtl"] .session-title-row,[dir="rtl"] .session-metrics{direction:rtl}
 @media(max-width:640px){.page-shell{width:min(100% - 22px,900px);margin:11px auto 28px}.hero{min-height:220px;padding:19px 19px 29px;border-radius:20px}.hero h1{font-size:31px}.stats-grid{gap:9px}.stat-card{padding:12px;gap:9px}.stat-icon{width:36px;height:36px}.stat-card strong{font-size:19px}.panel{padding:17px 14px;border-radius:16px}.field-grid{grid-template-columns:1fr;gap:12px}.section-heading{align-items:flex-start}.sessions-heading{flex-wrap:wrap}.session-item{padding:11px}.language-control{padding:7px 9px}}
+
+.session-actions{display:flex;align-items:center;gap:5px;flex:0 0 auto}.edit-button{color:#087e82}.edit-button:hover{border-color:#cce5df;background:#effaf6}.button-secondary{color:#587174;border:1px solid #dce8e6;background:#f7fbfa}
