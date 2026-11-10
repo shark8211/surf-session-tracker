@@ -24,5 +24,9 @@
   "delete": "Delete session",
   "emptyTitle": "No sessions yet",
   "emptySubtitle": "Add your first surf session using the form above.",
-  "localStorageNote": "Your sessions are saved in this browser on this device. They are not synced online."
+  "localStorageNote": "Your sessions are saved in this browser on this device. They are not synced online.",
+  "editSession": "Edit session",
+  "updateSession": "Update session",
+  "cancelEdit": "Cancel",
+  "edit": "Edit session"
 }
