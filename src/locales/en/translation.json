@@ -28,5 +28,20 @@
   "editSession": "Edit session",
   "updateSession": "Update session",
   "cancelEdit": "Cancel",
-  "edit": "Edit session"
+  "edit": "Edit session",
+  "liveOcean": "LIVE OCEAN DATA",
+  "surfConditions": "Surf conditions",
+  "myLocation": "My location",
+  "useGPS": "Use GPS",
+  "refresh": "Refresh forecast",
+  "loadingForecast": "Loading ocean conditions…",
+  "forecastError": "Could not load the forecast.",
+  "gpsUnsupported": "Geolocation is not supported by this browser.",
+  "gpsDenied": "Location access was denied. Please allow location access and try again.",
+  "period": "Wave period",
+  "swell": "Swell",
+  "seaTemperature": "Sea temperature",
+  "windGusts": "Wind gusts",
+  "updated": "Updated",
+  "forecastDisclaimer": "Forecast model data is approximate and may differ from local conditions. Always check the sea before entering the water."
 }
