@@ -28,5 +28,20 @@
   "editSession": "Modifier la session",
   "updateSession": "Mettre à jour",
   "cancelEdit": "Annuler",
-  "edit": "Modifier la session"
+  "edit": "Modifier la session",
+  "liveOcean": "DONNÉES MARINES EN DIRECT",
+  "surfConditions": "Conditions de surf",
+  "myLocation": "Ma position",
+  "useGPS": "Utiliser le GPS",
+  "refresh": "Actualiser les prévisions",
+  "loadingForecast": "Chargement des conditions marines…",
+  "forecastError": "Impossible de charger les prévisions.",
+  "gpsUnsupported": "La géolocalisation n’est pas prise en charge par ce navigateur.",
+  "gpsDenied": "Accès à la position refusé. Autorisez la localisation puis réessayez.",
+  "period": "Période des vagues",
+  "swell": "Houle",
+  "seaTemperature": "Température de la mer",
+  "windGusts": "Rafales de vent",
+  "updated": "Mis à jour",
+  "forecastDisclaimer": "Les données du modèle sont indicatives et peuvent différer des conditions locales. Vérifiez toujours la mer avant d’entrer dans l’eau."
 }
