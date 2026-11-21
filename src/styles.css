@@ -190,3 +190,34 @@ button { cursor: pointer; }
   .language-control { padding: 8px 10px; }
   .language-control select { max-width: 116px; font-size: 12px; }
 }
+
+
+/* Live surf conditions */
+.conditions-panel { padding: 25px; }
+.conditions-heading { align-items: flex-start; margin-bottom: 18px; }
+.conditions-location { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; color: #71858a; font-size: 12px; font-weight: 600; }
+.conditions-location svg { color: #078f83; }
+.conditions-tools { display: flex; align-items: center; gap: 8px; }
+.conditions-tool { color: #087d75; border: 1px solid #d7ebe4; background: #f4fbf8; }
+.conditions-tool:hover { background: #e7f7f0; }
+.conditions-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 11px; }
+.condition-card { display: flex; flex-direction: column; gap: 9px; min-width: 0; padding: 17px 15px; border: 1px solid #dfebe7; border-radius: 16px; background: linear-gradient(145deg,#fbfefd,#f3faf7); }
+.condition-label { display: flex; align-items: center; gap: 7px; color: #61797d; font-size: 11px; font-weight: 800; }
+.condition-label svg { color: #078f83; }
+.condition-card strong { color: #123943; font-family: 'Manrope',sans-serif; font-size: 27px; line-height: 1; letter-spacing: -.04em; }
+.condition-card strong small { color: #71858a; font-family: 'DM Sans',sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0; }
+.condition-detail { color: #71858a; font-size: 11px; font-weight: 600; }
+.conditions-footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 15px; color: #84999b; font-size: 10px; }
+.conditions-disclaimer { margin: 12px 0 0; color: #829697; font-size: 10px; line-height: 1.55; }
+.conditions-error { margin: 0 0 13px; padding: 10px 12px; color: #9a4141; border: 1px solid #f0d7d7; border-radius: 10px; background: #fff6f6; font-size: 12px; }
+.conditions-loading { display: flex; align-items: center; gap: 9px; min-height: 110px; color: #627b7e; font-size: 13px; }
+.spin { animation: forecast-spin 1s linear infinite; }
+@keyframes forecast-spin { to { transform: rotate(360deg); } }
+@media (max-width: 760px) { .conditions-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 480px) {
+  .conditions-panel { padding: 17px 13px; }
+  .conditions-heading { flex-direction: column; }
+  .conditions-tools { width: 100%; justify-content: flex-end; }
+  .condition-card { padding: 13px 11px; }
+  .condition-card strong { font-size: 24px; }
+}
