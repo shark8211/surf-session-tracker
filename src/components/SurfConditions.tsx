@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Activity, Compass, LocateFixed, RefreshCw, Thermometer, Waves, Wind } from 'lucide-react'
 
 type Conditions = {
+  location: { latitude: number; longitude: number }
   timezone: string
   updatedAt: string
   marine: {
