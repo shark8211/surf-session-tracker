@@ -1,5 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import SurfConditions from './SurfConditions'
+import SurfSpots from './SurfSpots'
 import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus, Pencil, Save, X } from 'lucide-react'
 
 type Session = {
@@ -150,6 +152,9 @@ export default function SurfSessionTracker() {
           <div><span>{t('totalHours')}</span><strong>{totalHours.toFixed(1)} <small>{t('hoursUnit')}</small></strong></div>
         </article>
       </section>
+
+      <SurfConditions />
+      <SurfSpots />
 
       <section className="panel form-panel">
         <div className="section-heading">

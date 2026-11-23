@@ -28,5 +28,20 @@
   "editSession": "Editar sesión",
   "updateSession": "Actualizar sesión",
   "cancelEdit": "Cancelar",
-  "edit": "Editar sesión"
+  "edit": "Editar sesión",
+  "liveOcean": "DATOS MARINOS EN DIRECTO",
+  "surfConditions": "Condiciones de surf",
+  "myLocation": "Mi ubicación",
+  "useGPS": "Usar GPS",
+  "refresh": "Actualizar pronóstico",
+  "loadingForecast": "Cargando condiciones del mar…",
+  "forecastError": "No se pudo cargar el pronóstico.",
+  "gpsUnsupported": "Este navegador no admite geolocalización.",
+  "gpsDenied": "Se denegó el acceso a la ubicación. Permite el acceso e inténtalo de nuevo.",
+  "period": "Periodo de ola",
+  "swell": "Mar de fondo",
+  "seaTemperature": "Temperatura del mar",
+  "windGusts": "Ráfagas de viento",
+  "updated": "Actualizado",
+  "forecastDisclaimer": "Los datos del modelo son aproximados y pueden diferir de las condiciones locales. Comprueba siempre el mar antes de entrar al agua."
 }
