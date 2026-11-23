@@ -221,3 +221,44 @@ button { cursor: pointer; }
   .condition-card { padding: 13px 11px; }
   .condition-card strong { font-size: 24px; }
 }
+
+
+/* Global surf spot explorer */
+.spots-panel { overflow: hidden; }
+.spots-subtitle { margin: 8px 0 0; color: #71858a; font-size: 12px; line-height: 1.6; }
+.spots-toolbar { display: grid; grid-template-columns: minmax(0,1fr) 180px auto; gap: 10px; margin-bottom: 13px; }
+.spots-search { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 0 12px; color: #078f83; border: 1px solid #dce8e5; border-radius: 12px; background: #f9fcfb; }
+.spots-search input { width: 100%; min-width: 0; height: 44px; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 12px; }
+.spots-country { min-width: 0; padding: 0 12px; color: var(--ink); border: 1px solid #dce8e5; border-radius: 12px; background: #f9fcfb; font-size: 12px; }
+.spots-gps { white-space: nowrap; }
+.spots-message { margin: 0 0 12px; padding: 10px 12px; color: #087d75; border: 1px solid #d7ebe4; border-radius: 10px; background: #f2fbf7; font-size: 12px; }
+.spots-layout { display: grid; grid-template-columns: minmax(260px,.82fr) minmax(0,1.4fr); gap: 14px; }
+.spots-results { max-height: 470px; overflow: auto; padding: 10px; border: 1px solid #e0ebe7; border-radius: 15px; background: #f9fcfb; }
+.spots-count { padding: 2px 5px 9px; color: #829697; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.spot-result { display: flex; align-items: center; gap: 9px; width: 100%; padding: 10px 8px; text-align: left; border: 1px solid transparent; border-radius: 11px; background: transparent; }
+.spot-result:hover, .spot-result.is-selected { border-color: #cce9e1; background: #edf9f4; }
+.spot-result-icon { display: grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; color: #078f83; border-radius: 10px; background: #e1f5ed; }
+.spot-result-copy { display: grid; min-width: 0; flex: 1; gap: 3px; }
+.spot-result-copy strong { overflow: hidden; color: #123943; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.spot-result-copy small { overflow: hidden; color: #829697; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.spot-level { flex: 0 0 auto; color: #71858a; font-size: 9px; }
+.spots-empty { padding: 15px; color: #71858a; font-size: 12px; }
+.spots-map-wrap { min-width: 0; overflow: hidden; border: 1px solid #dce8e5; border-radius: 15px; background: #f9fcfb; }
+.spots-map-title { display: flex; align-items: center; gap: 8px; padding: 12px 14px; color: #426167; font-size: 12px; }
+.spots-map-title svg { color: #078f83; }
+.spots-map-wrap iframe { display: block; width: 100%; height: 310px; border: 0; background: #e8f0ed; }
+.spots-selected { display: grid; gap: 4px; padding: 12px 14px 0; }
+.spots-selected strong { color: #123943; font-size: 14px; }
+.spots-selected span { color: #71858a; font-size: 11px; }
+.spots-note { margin: 9px 14px 0; color: #829697; font-size: 10px; line-height: 1.5; }
+.spots-open-map { display: inline-block; margin: 9px 14px 13px; color: #087d75; font-size: 11px; font-weight: 800; text-decoration: none; }
+.spots-open-map:hover { text-decoration: underline; }
+[dir="rtl"] .spot-result { text-align: right; }
+@media (max-width: 760px) {
+  .spots-toolbar { grid-template-columns: 1fr 1fr; }
+  .spots-search { grid-column: 1 / -1; }
+  .spots-gps { grid-column: 1 / -1; }
+  .spots-layout { grid-template-columns: 1fr; }
+  .spots-results { max-height: 280px; }
+  .spots-map-wrap iframe { height: 270px; }
+}
