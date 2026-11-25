@@ -2,6 +2,12 @@ import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Activity, Compass, LocateFixed, RefreshCw, Thermometer, Waves, Wind } from 'lucide-react'
 
+export type SurfSpotSelection = {
+  latitude: number
+  longitude: number
+  label: string
+}
+
 type Conditions = {
   location: { latitude: number; longitude: number }
   timezone: string
@@ -25,7 +31,11 @@ type Conditions = {
   } | null
 }
 
-const TAGHAZOUT = { lat: 30.545, lon: -9.711, label: 'Taghazout, Morocco' }
+const TAGHAZOUT: SurfSpotSelection = {
+  latitude: 30.545,
+  longitude: -9.711,
+  label: 'Taghazout, Morocco',
+}
 
 function numberOrDash(value: number | null | undefined, digits = 1) {
   return typeof value === 'number' && Number.isFinite(value) ? value.toFixed(digits) : '—'
@@ -36,10 +46,14 @@ function compassDirection(degrees: number | null | undefined) {
   return ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'][Math.round(degrees / 45) % 8]
 }
 
-export default function SurfConditions() {
+type SurfConditionsProps = {
+  selectedSpot: SurfSpotSelection
+}
+
+export default function SurfConditions({ selectedSpot }: SurfConditionsProps) {
   const { t } = useTranslation()
   const [conditions, setConditions] = useState<Conditions | null>(null)
-  const [place, setPlace] = useState(TAGHAZOUT.label)
+  const [place, setPlace] = useState(selectedSpot.label)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -60,8 +74,9 @@ export default function SurfConditions() {
   }, [t])
 
   useEffect(() => {
-    void loadConditions(TAGHAZOUT.lat, TAGHAZOUT.lon, TAGHAZOUT.label)
-  }, [loadConditions])
+    setPlace(selectedSpot.label)
+    void loadConditions(selectedSpot.latitude, selectedSpot.longitude, selectedSpot.label)
+  }, [loadConditions, selectedSpot])
 
   const useMyLocation = () => {
     if (!navigator.geolocation) {
@@ -95,8 +110,8 @@ export default function SurfConditions() {
         </div>
         <div className="conditions-tools">
           <button className="icon-button conditions-tool" type="button" onClick={() => void loadConditions(
-            conditions?.location?.latitude ?? TAGHAZOUT.lat,
-            conditions?.location?.longitude ?? TAGHAZOUT.lon,
+            conditions?.location?.latitude ?? selectedSpot.latitude ?? TAGHAZOUT.latitude,
+            conditions?.location?.longitude ?? selectedSpot.longitude ?? TAGHAZOUT.longitude,
             place,
           )} aria-label={t('refresh')} title={t('refresh')} disabled={loading}>
             <RefreshCw size={17} className={loading ? 'spin' : ''} />
