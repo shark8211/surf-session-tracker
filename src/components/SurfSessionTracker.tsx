@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import SurfConditions from './SurfConditions'
+import SurfConditions, { type SurfSpotSelection } from './SurfConditions'
 import SurfSpots from './SurfSpots'
 import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus, Pencil, Save, X } from 'lucide-react'
 
@@ -15,6 +15,11 @@ type Session = {
 }
 type SessionForm = Omit<Session, 'id'>
 
+const initialSpot: SurfSpotSelection = {
+  latitude: 30.5468,
+  longitude: -9.7112,
+  label: 'Anchor Point, Taghazout, Morocco',
+}
 const emptyForm: SessionForm = { date: '', location: '', duration: '', waveHeight: '', windSpeed: '', notes: '' }
 const languageOptions = [
   { value: 'en', label: 'English', flag: '🇬🇧' },
@@ -47,6 +52,7 @@ export default function SurfSessionTracker() {
   const [formData, setFormData] = useState<SessionForm>(emptyForm)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [lang, setLang] = useState(i18n.resolvedLanguage || i18n.language || 'en')
+  const [selectedSpot, setSelectedSpot] = useState<SurfSpotSelection>(initialSpot)
   const totalHours = sessions.reduce((total, session) => total + (Number(session.duration) || 0), 0)
 
   useEffect(() => {
@@ -153,8 +159,8 @@ export default function SurfSessionTracker() {
         </article>
       </section>
 
-      <SurfConditions />
-      <SurfSpots />
+      <SurfConditions selectedSpot={selectedSpot} />
+      <SurfSpots onSelectSpot={setSelectedSpot} />
 
       <section className="panel form-panel">
         <div className="section-heading">
