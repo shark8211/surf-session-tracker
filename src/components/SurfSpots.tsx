@@ -1,37 +1,36 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Compass, LocateFixed, MapPin, Search, Waves } from 'lucide-react'
+import type { SurfSpotSelection } from './SurfConditions'
 
-type Spot = {
+type Spot = SurfSpotSelection & {
   id: string
   name: string
   country: string
   region: string
-  lat: number
-  lon: number
   level: 'Beginner' | 'Intermediate' | 'Advanced'
 }
 
 const spots: Spot[] = [
-  { id: 'anchor-point', name: 'Anchor Point', country: 'Morocco', region: 'Taghazout', lat: 30.5468, lon: -9.7112, level: 'Advanced' },
-  { id: 'hash-point', name: 'Hash Point', country: 'Morocco', region: 'Taghazout', lat: 30.5460, lon: -9.7140, level: 'Intermediate' },
-  { id: 'panoramas', name: 'Panoramas', country: 'Morocco', region: 'Taghazout', lat: 30.5485, lon: -9.7190, level: 'Beginner' },
-  { id: 'killers', name: 'Killer Point', country: 'Morocco', region: 'Taghazout', lat: 30.5030, lon: -9.6810, level: 'Advanced' },
-  { id: 'boilers', name: 'Boilers', country: 'Morocco', region: 'Cap Ghir', lat: 30.6330, lon: -9.8660, level: 'Advanced' },
-  { id: 'cap-ghir', name: 'Cap Ghir', country: 'Morocco', region: 'Agadir', lat: 30.5930, lon: -9.8780, level: 'Intermediate' },
-  { id: 'anza', name: 'Anza', country: 'Morocco', region: 'Agadir', lat: 30.4280, lon: -9.6540, level: 'Intermediate' },
-  { id: 'imsouane', name: 'Imsouane Bay', country: 'Morocco', region: 'Imsouane', lat: 30.8420, lon: -9.8200, level: 'Beginner' },
-  { id: 'safi', name: 'Safi', country: 'Morocco', region: 'Safi', lat: 32.2990, lon: -9.2500, level: 'Advanced' },
-  { id: 'essaouira', name: 'Essaouira', country: 'Morocco', region: 'Essaouira', lat: 31.5100, lon: -9.7700, level: 'Intermediate' },
-  { id: 'dakhla', name: 'Oum Labouir', country: 'Morocco', region: 'Dakhla', lat: 23.7200, lon: -15.9500, level: 'Intermediate' },
-  { id: 'hossegor', name: 'La Gravière', country: 'France', region: 'Hossegor', lat: 43.6600, lon: -1.4500, level: 'Advanced' },
-  { id: 'nazare', name: 'Praia do Norte', country: 'Portugal', region: 'Nazaré', lat: 39.6020, lon: -9.0700, level: 'Advanced' },
-  { id: 'uluwatu', name: 'Uluwatu', country: 'Indonesia', region: 'Bali', lat: -8.8290, lon: 115.0870, level: 'Advanced' },
-  { id: 'jeffreys', name: 'Supertubes', country: 'South Africa', region: 'Jeffreys Bay', lat: -34.0500, lon: 24.9300, level: 'Advanced' },
-  { id: 'pipeline', name: 'Banzai Pipeline', country: 'United States', region: 'Oahu, Hawaii', lat: 21.6650, lon: -158.0530, level: 'Advanced' },
-  { id: 'teahupoo', name: 'Teahupo’o', country: 'French Polynesia', region: 'Tahiti', lat: -17.8400, lon: -149.2700, level: 'Advanced' },
-  { id: 'gold-coast', name: 'Snapper Rocks', country: 'Australia', region: 'Gold Coast', lat: -28.1650, lon: 153.5450, level: 'Advanced' },
-  { id: 'puerto', name: 'Zicatela', country: 'Mexico', region: 'Puerto Escondido', lat: 15.8600, lon: -97.0700, level: 'Advanced' },
+  { id: 'anchor-point', name: 'Anchor Point', country: 'Morocco', region: 'Taghazout', latitude: 30.5468, longitude: -9.7112, label: 'Anchor Point, Taghazout, Morocco', level: 'Advanced' },
+  { id: 'hash-point', name: 'Hash Point', country: 'Morocco', region: 'Taghazout', latitude: 30.5460, longitude: -9.7140, label: 'Hash Point, Taghazout, Morocco', level: 'Intermediate' },
+  { id: 'panoramas', name: 'Panoramas', country: 'Morocco', region: 'Taghazout', latitude: 30.5485, longitude: -9.7190, label: 'Panoramas, Taghazout, Morocco', level: 'Beginner' },
+  { id: 'killers', name: 'Killer Point', country: 'Morocco', region: 'Taghazout', latitude: 30.5030, longitude: -9.6810, label: 'Killer Point, Taghazout, Morocco', level: 'Advanced' },
+  { id: 'boilers', name: 'Boilers', country: 'Morocco', region: 'Cap Ghir', latitude: 30.6330, longitude: -9.8660, label: 'Boilers, Cap Ghir, Morocco', level: 'Advanced' },
+  { id: 'cap-ghir', name: 'Cap Ghir', country: 'Morocco', region: 'Agadir', latitude: 30.5930, longitude: -9.8780, label: 'Cap Ghir, Agadir, Morocco', level: 'Intermediate' },
+  { id: 'anza', name: 'Anza', country: 'Morocco', region: 'Agadir', latitude: 30.4280, longitude: -9.6540, label: 'Anza, Agadir, Morocco', level: 'Intermediate' },
+  { id: 'imsouane', name: 'Imsouane Bay', country: 'Morocco', region: 'Imsouane', latitude: 30.8420, longitude: -9.8200, label: 'Imsouane Bay, Morocco', level: 'Beginner' },
+  { id: 'safi', name: 'Safi', country: 'Morocco', region: 'Safi', latitude: 32.2990, longitude: -9.2500, label: 'Safi, Morocco', level: 'Advanced' },
+  { id: 'essaouira', name: 'Essaouira', country: 'Morocco', region: 'Essaouira', latitude: 31.5100, longitude: -9.7700, label: 'Essaouira, Morocco', level: 'Intermediate' },
+  { id: 'dakhla', name: 'Oum Labouir', country: 'Morocco', region: 'Dakhla', latitude: 23.7200, longitude: -15.9500, label: 'Oum Labouir, Dakhla, Morocco', level: 'Intermediate' },
+  { id: 'hossegor', name: 'La Gravière', country: 'France', region: 'Hossegor', latitude: 43.6600, longitude: -1.4500, label: 'La Gravière, Hossegor, France', level: 'Advanced' },
+  { id: 'nazare', name: 'Praia do Norte', country: 'Portugal', region: 'Nazaré', latitude: 39.6020, longitude: -9.0700, label: 'Praia do Norte, Nazaré, Portugal', level: 'Advanced' },
+  { id: 'uluwatu', name: 'Uluwatu', country: 'Indonesia', region: 'Bali', latitude: -8.8290, longitude: 115.0870, label: 'Uluwatu, Bali, Indonesia', level: 'Advanced' },
+  { id: 'jeffreys', name: 'Supertubes', country: 'South Africa', region: 'Jeffreys Bay', latitude: -34.0500, longitude: 24.9300, label: 'Supertubes, Jeffreys Bay, South Africa', level: 'Advanced' },
+  { id: 'pipeline', name: 'Banzai Pipeline', country: 'United States', region: 'Oahu, Hawaii', latitude: 21.6650, longitude: -158.0530, label: 'Banzai Pipeline, Oahu, Hawaii', level: 'Advanced' },
+  { id: 'teahupoo', name: 'Teahupo’o', country: 'French Polynesia', region: 'Tahiti', latitude: -17.8400, longitude: -149.2700, label: 'Teahupo’o, Tahiti, French Polynesia', level: 'Advanced' },
+  { id: 'gold-coast', name: 'Snapper Rocks', country: 'Australia', region: 'Gold Coast', latitude: -28.1650, longitude: 153.5450, label: 'Snapper Rocks, Gold Coast, Australia', level: 'Advanced' },
+  { id: 'puerto', name: 'Zicatela', country: 'Mexico', region: 'Puerto Escondido', latitude: 15.8600, longitude: -97.0700, label: 'Zicatela, Puerto Escondido, Mexico', level: 'Advanced' },
 ]
 
 const copy = {
@@ -42,7 +41,11 @@ const copy = {
   pt: { eyebrow: 'EXPLORAR A COSTA', title: 'Picos de surf pelo mundo', subtitle: 'Descubra picos conhecidos e abra cada local no mapa.', search: 'Pesquisar pico, cidade ou país…', all: 'Todos os países', gps: 'Usar a minha localização', loading: 'A localizar…', denied: 'O acesso à localização foi recusado. Pode explorar os picos manualmente.', map: 'Mapa do pico selecionado', level: 'Nível', beginner: 'Iniciante', intermediate: 'Intermédio', advanced: 'Avançado', spots: 'picos', note: 'As coordenadas são aproximadas. Confirme sempre o acesso, os perigos e as condições locais.' },
 }
 
-export default function SurfSpots() {
+type SurfSpotsProps = {
+  onSelectSpot: (spot: SurfSpotSelection) => void
+}
+
+export default function SurfSpots({ onSelectSpot }: SurfSpotsProps) {
   const { i18n } = useTranslation()
   const lang = (i18n.resolvedLanguage || i18n.language || 'en').slice(0, 2) as keyof typeof copy
   const t = copy[lang] || copy.en
@@ -60,8 +63,13 @@ export default function SurfSpots() {
   }), [country, query])
   const delta = 0.018
   const mapUrl = 'https://www.openstreetmap.org/export/embed.html?bbox=' +
-    [selected.lon - delta, selected.lat - delta, selected.lon + delta, selected.lat + delta].join('%2C') +
-    '&layer=mapnik&marker=' + selected.lat + '%2C' + selected.lon
+    [selected.longitude - delta, selected.latitude - delta, selected.longitude + delta, selected.latitude + delta].join('%2C') +
+    '&layer=mapnik&marker=' + selected.latitude + '%2C' + selected.longitude
+
+  const selectSpot = (spot: Spot) => {
+    setSelectedId(spot.id)
+    onSelectSpot({ latitude: spot.latitude, longitude: spot.longitude, label: spot.label })
+  }
 
   const useGps = () => {
     if (!navigator.geolocation) {
@@ -73,10 +81,10 @@ export default function SurfSpots() {
     navigator.geolocation.getCurrentPosition(
       position => {
         const nearest = [...spots].sort((a, b) =>
-          Math.hypot(a.lat - position.coords.latitude, a.lon - position.coords.longitude) -
-          Math.hypot(b.lat - position.coords.latitude, b.lon - position.coords.longitude)
+          Math.hypot(a.latitude - position.coords.latitude, a.longitude - position.coords.longitude) -
+          Math.hypot(b.latitude - position.coords.latitude, b.longitude - position.coords.longitude)
         )[0]
-        setSelectedId(nearest.id)
+        selectSpot(nearest)
         setCountry('all')
         setQuery('')
         setGpsMessage(nearest.name + ' — ' + nearest.region + ', ' + nearest.country)
@@ -113,7 +121,7 @@ export default function SurfSpots() {
         <div className="spots-results">
           <div className="spots-count">{filtered.length} {t.spots}</div>
           {filtered.length === 0 ? <p className="spots-empty">No spots match this search.</p> : filtered.map(spot => (
-            <button className={'spot-result' + (spot.id === selectedId ? ' is-selected' : '')} type="button" key={spot.id} onClick={() => setSelectedId(spot.id)}>
+            <button className={'spot-result' + (spot.id === selectedId ? ' is-selected' : '')} type="button" key={spot.id} onClick={() => selectSpot(spot)}>
               <span className="spot-result-icon"><Waves size={17} /></span>
               <span className="spot-result-copy"><strong>{spot.name}</strong><small>{spot.region}, {spot.country}</small></span>
               <span className="spot-level">{spot.level === 'Beginner' ? t.beginner : spot.level === 'Intermediate' ? t.intermediate : t.advanced}</span>
@@ -125,7 +133,7 @@ export default function SurfSpots() {
           <iframe title={t.map + ': ' + selected.name} src={mapUrl} loading="lazy" />
           <div className="spots-selected"><strong>{selected.name}</strong><span>{selected.region}, {selected.country} · {t.level}: {levelLabel}</span></div>
           <p className="spots-note">{t.note}</p>
-          <a className="spots-open-map" href={'https://www.openstreetmap.org/?mlat=' + selected.lat + '&mlon=' + selected.lon + '#map=13/' + selected.lat + '/' + selected.lon} target="_blank" rel="noreferrer">Open full map ↗</a>
+          <a className="spots-open-map" href={'https://www.openstreetmap.org/?mlat=' + selected.latitude + '&mlon=' + selected.longitude + '#map=13/' + selected.latitude + '/' + selected.longitude} target="_blank" rel="noreferrer">Open full map ↗</a>
         </div>
       </div>
     </section>
