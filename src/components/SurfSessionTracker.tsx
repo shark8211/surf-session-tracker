@@ -1,6 +1,6 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus, Pencil, Save, X } from 'lucide-react'
+import { Activity, CalendarDays, Clock3, Download, Globe2, MapPin, Trash2, Waves, Wind, Plus, Pencil, Save, X, Trophy, MapPinned } from 'lucide-react'
 
 type Session = {
   id: string
@@ -46,6 +46,13 @@ export default function SurfSessionTracker() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [lang, setLang] = useState(i18n.resolvedLanguage || i18n.language || 'en')
   const totalHours = sessions.reduce((total, session) => total + (Number(session.duration) || 0), 0)
+  const longestSession = sessions.reduce((longest, session) => Math.max(longest, Number(session.duration) || 0), 0)
+  const spotCounts = sessions.reduce<Record<string, number>>((counts, session) => {
+    const key = session.location.trim()
+    if (key) counts[key] = (counts[key] || 0) + 1
+    return counts
+  }, {})
+  const favoriteSpot = Object.entries(spotCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || ''
 
   useEffect(() => {
     window.localStorage.setItem('surfSessions', JSON.stringify(sessions))
@@ -148,6 +155,14 @@ export default function SurfSessionTracker() {
         <article className="stat-card">
           <div className="stat-icon"><Clock3 size={19} /></div>
           <div><span>{t('totalHours')}</span><strong>{totalHours.toFixed(1)} <small>{t('hoursUnit')}</small></strong></div>
+        </article>
+        <article className="stat-card">
+          <div className="stat-icon"><Trophy size={19} /></div>
+          <div><span>{t('longestSession')}</span><strong>{longestSession > 0 ? longestSession.toFixed(1) : '—'} {longestSession > 0 && <small>{t('hoursUnit')}</small>}</strong></div>
+        </article>
+        <article className="stat-card favorite-stat">
+          <div className="stat-icon"><MapPinned size={19} /></div>
+          <div><span>{t('favoriteSpot')}</span><strong className="favorite-spot-name">{favoriteSpot || '—'}</strong></div>
         </article>
       </section>
 
