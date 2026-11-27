@@ -28,5 +28,7 @@
   "editSession": "تعديل الجلسة",
   "updateSession": "تحديث الجلسة",
   "cancelEdit": "إلغاء",
-  "edit": "تعديل الجلسة"
+  "edit": "تعديل الجلسة",
+  "longestSession": "أطول جلسة",
+  "favoriteSpot": "أكثر موقع زيارة"
 }
