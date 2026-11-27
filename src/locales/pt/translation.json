@@ -28,5 +28,7 @@
   "editSession": "Editar sessão",
   "updateSession": "Atualizar sessão",
   "cancelEdit": "Cancelar",
-  "edit": "Editar sessão"
+  "edit": "Editar sessão",
+  "longestSession": "Sessão mais longa",
+  "favoriteSpot": "Pico mais visitado"
 }
