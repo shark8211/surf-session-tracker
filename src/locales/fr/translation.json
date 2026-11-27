@@ -28,5 +28,7 @@
   "editSession": "Modifier la session",
   "updateSession": "Mettre à jour",
   "cancelEdit": "Annuler",
-  "edit": "Modifier la session"
+  "edit": "Modifier la session",
+  "longestSession": "Session la plus longue",
+  "favoriteSpot": "Spot le plus fréquenté"
 }
